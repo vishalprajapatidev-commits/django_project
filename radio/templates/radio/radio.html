@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Button</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .container {
+            width: 400px;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            color: #007BFF;
+            font-size: 24px;
+        }
+        
+        .radio-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .radio-buttons label {
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            user-select: none;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .radio-buttons input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .radio-buttons .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #ccc;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .radio-buttons input:checked ~ .checkmark {
+            background-color: #007BFF;
+        }
+        
+        .radio-buttons .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        
+        .radio-buttons input:checked ~ .checkmark:after {
+            display: block;
+        }
+        
+        .radio-buttons .checkmark:after {
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+        
+        .output {
+            margin-top: 20px;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .output input {
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+        }
+
+        /* Style for the submit button */
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        button[type="submit"]:active {
+            background-color: #004080;
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RADIO BUTTON</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="radio-buttons">
+                <label>
+                    Male
+                    <input type="radio" name="gender" value="male">
+                    <span class="checkmark"></span>
+                </label>
+                <label>
+                    Female
+                    <input type="radio" name="gender" value="female">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="output" id="output">
+            <label>Selected Gender:</label>
+            <input type="text" id="selectedGender" value="{% if selected_gender %}{{ selected_gender }}{% endif %}" readonly><br>
+        </div>
+    </div>
+</body>
+</html>
